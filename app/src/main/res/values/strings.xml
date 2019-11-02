@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">DemoApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="signedInOrNot">Not Signed In</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_my_demo">My DemoApp</string>
+    <string name="menu_my_orders">My Orders</string>
+    <string name="menu_my_rewards">My Rewards</string>
+    <string name="menu_my_cart">My Cart</string>
+    <string name="menu_my_wishlist">My Wishlist</string>
+    <string name="menu_my_account">My Account</string>
+    <string name="menu_my_signOut">Sign Out</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <!--    <string name="communicate">Communicate</string>-->
+</resources>

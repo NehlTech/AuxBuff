@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "129799027087",
+    "firebase_url": "https://demoapp-32b84.firebaseio.com",
+    "project_id": "demoapp-32b84",
+    "storage_bucket": "demoapp-32b84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129799027087:android:2b0d79d215ae607432f3fa",
+        "android_client_info": {
+          "package_name": "com.cryptech.demoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129799027087-s00cro7jaroj7m4n8nafjm9vgp3uriea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmrzRXJnltVhgliaXe-xI2mxyWZI0hpLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129799027087-s00cro7jaroj7m4n8nafjm9vgp3uriea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
