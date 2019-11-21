@@ -1,5 +1,6 @@
 package com.cryptech.demoapp.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cryptech.demoapp.R;
+import com.cryptech.demoapp.activities.ProductDetailsActivity;
 import com.cryptech.demoapp.model.HorizontalScrollProductModel;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
+    public View getView(int i, View convertView, final ViewGroup viewGroup) {
         View view;
 
         if (convertView == null) {
@@ -49,6 +51,13 @@ public class GridProductLayoutAdapter extends BaseAdapter {
             }
 
             view.setBackgroundColor(Color.parseColor("#ffffff"));
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent productDetailsIntent = new Intent(viewGroup.getContext(), ProductDetailsActivity.class);
+                    viewGroup.getContext().startActivity(productDetailsIntent);
+                }
+            });
 
             ImageView productImage = view.findViewById(R.id.h_s_productImage);
             TextView productTitle = view.findViewById(R.id.h_s_productTitle);

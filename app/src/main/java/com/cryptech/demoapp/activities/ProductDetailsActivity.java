@@ -7,15 +7,17 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.cryptech.demoapp.R;
 import com.cryptech.demoapp.adapter.ProductDetailsAdapter;
 import com.cryptech.demoapp.adapter.ProductImagesAdapter;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -29,6 +31,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private FloatingActionButton addToWishListBtn;
     private static boolean ALREADY_ADDED_TO_WISHLIST = false;
 
+
+
+    /********  RATE LAYOUT STARTS ******/
+    private LinearLayout rateNowContainer;
+    /********  RATE LAYOUT ENDS ******/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +54,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDetailsViewpager = findViewById(R.id.product_details_viewpager);
         productDetailsTablayout = findViewById(R.id.product_details_tablayout);
 
+        rateNowContainer = findViewById(R.id.rate_now_container);
+
         List<Integer> productImages = new ArrayList<>();
         productImages.add(R.drawable.phone5);
         productImages.add(R.drawable.phone1);
@@ -59,6 +68,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         viewPagerIndicator.setupWithViewPager(productImageViewPager,true);
         addToWishList();
         productDetailSetAdapter();
+        rateNow();
 
 
     }
@@ -78,6 +88,40 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    /********  RATING NOW STARTS ******/
+
+    private void rateNow() {
+        for (int x = 0; x < rateNowContainer.getChildCount(); x++) {
+
+            final int starPosition = x;
+            rateNowContainer.getChildAt(x).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setRating(starPosition);
+                }
+            });
+
+        }
+    }
+
+    /********  RATING NOW ENDS ******/
+
+    private void setRating(int starPosition) {
+
+        for (int x = 0; x < rateNowContainer.getChildCount(); x++) {
+
+            ImageView starBtn = (ImageView) rateNowContainer.getChildAt(x);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                starBtn.setImageTintList(ColorStateList.valueOf(Color.parseColor("#bebebe")));
+                if (x <= starPosition) {
+                    starBtn.setImageTintList(ColorStateList.valueOf(Color.parseColor("#ffbb00")));
+                }
+            }
+        }
+
     }
 
     private void productDetailSetAdapter() {
