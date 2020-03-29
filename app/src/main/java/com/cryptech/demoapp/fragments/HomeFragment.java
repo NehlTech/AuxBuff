@@ -1,28 +1,22 @@
 package com.cryptech.demoapp.fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import android.os.Handler;
+
+
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.cryptech.demoapp.R;
 import com.cryptech.demoapp.adapter.CategoryAdapter;
-import com.cryptech.demoapp.adapter.GridProductLayoutAdapter;
 import com.cryptech.demoapp.adapter.HomePageAdapter;
 import com.cryptech.demoapp.adapter.HorizontalScrollProductAdapter;
 import com.cryptech.demoapp.adapter.SliderAdapter;

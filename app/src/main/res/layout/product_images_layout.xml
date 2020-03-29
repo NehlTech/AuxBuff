@@ -34,15 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/product_title">
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
-            android:src="@mipmap/star2"
-            android:tint="@color/colorAccent" />
-
         <TextView
             android:id="@+id/tv_product_rating_miniview"
             android:layout_width="wrap_content"
@@ -52,6 +43,16 @@
             android:text="4.5"
             android:textColor="@color/colorAccent"
             android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:src="@mipmap/star2"
+            android:tint="@color/colorAccent" />
+
 
     </LinearLayout>
 

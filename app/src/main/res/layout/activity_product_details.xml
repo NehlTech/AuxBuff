@@ -8,6 +8,7 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -20,8 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
-
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -29,7 +29,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,13 +40,74 @@
             android:background="@color/colorAccent"
             android:orientation="vertical">
 
-            <include layout="@layout/product_images_layout"/>
+            <include layout="@layout/product_images_layout" />
 
-            <include layout="@layout/reward_with_product_layout"/>
-            <include layout="@layout/product_description_layout"/>
-            <include layout="@layout/product_details_only_layout"/>
-            <include layout="@layout/ratings_layout"/>
+            <include layout="@layout/reward_with_product_layout" />
+
+            <include layout="@layout/product_description_layout" />
+
+            <include layout="@layout/product_details_only_layout" />
+
+            <include layout="@layout/ratings_layout" />
         </LinearLayout>
     </ScrollView>
+
+
+
+<!--    This is the cart fragment layout starts-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:background="@color/colorAccent"
+        android:elevation="8dp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal">
+
+<!--       Add to cart section starts-->
+        <LinearLayout
+            android:id="@+id/add_to_cart_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/colorAccent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="ADD TO CART"
+                android:drawableEnd="@drawable/shopping_cart"
+                android:drawableRight="@drawable/shopping_cart"
+                android:drawablePadding="8dp"
+                android:drawableTint="#485F70"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#485F70"/>
+        </LinearLayout>
+        <!--       Add to cart section ends-->
+
+<!--        Cart button starts -->
+        <Button
+            android:id="@+id/buy_now_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stateListAnimator="@null"
+            android:text="Buy Now"
+            android:textColor="@color/colorAccent"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+<!--        Cart button ends-->
+
+    </LinearLayout>
+    <!--    This is the cart fragment layout ends-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
