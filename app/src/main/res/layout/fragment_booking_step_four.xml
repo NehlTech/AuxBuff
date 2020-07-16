@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="407dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/barber" />
+
+    <LinearLayout
+        android:background="@drawable/rounded_dialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thank you for booking our services!"
+            android:textColor="#ffffff"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Information"
+            android:textColor="#ffffff"
+            android:textAllCaps="true"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:srcCompat="@drawable/ic_event_note_black_24dp"/>
+            <TextView
+                android:id="@+id/booking_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10h00 at 23/07/2020"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:srcCompat="@drawable/ic_account_circle_black_24dp"/>
+            <TextView
+                android:id="@+id/booking_worker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asabea"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/holo_blue_bright"/>
+        <TextView
+            android:id="@+id/booking_worker_name"
+            android:paddingTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salon name"
+            android:textAllCaps="true"
+            android:paddingBottom="4dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/roboto_regular"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:srcCompat="@drawable/ic_web_black_24dp"/>
+            <TextView
+                android:id="@+id/booking_salon_web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="https://www.eddy.com.gh"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+
+        <LinearLayout
+        android:orientation="horizontal"
+            android:paddingBottom="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:srcCompat="@drawable/ic_phone_iphone_black_24dp"/>
+        <TextView
+            android:id="@+id/booking_salon_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+233 26-606-5302"
+            android:textSize="14sp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/roboto_regular"/>
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:srcCompat="@drawable/ic_access_time_black_24dp"/>
+            <TextView
+                android:id="@+id/booking_salon_open_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9h00 - 21h00"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:srcCompat="@drawable/ic_location_on_black_24dp"/>
+            <TextView
+                android:id="@+id/booking_salon_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textSize="14sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/roboto_regular"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONFIRM"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_marginTop="8dp"
+            android:background="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/txt_skip"/>
+
+    </LinearLayout>
+
+</LinearLayout>

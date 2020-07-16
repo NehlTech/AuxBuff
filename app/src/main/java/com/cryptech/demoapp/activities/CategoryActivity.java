@@ -11,19 +11,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cryptech.demoapp.R;
-import com.cryptech.demoapp.adapter.CategoryAdapter;
 import com.cryptech.demoapp.adapter.HomePageAdapter;
-import com.cryptech.demoapp.model.CategoryModel;
 import com.cryptech.demoapp.model.HomePageModel;
 import com.cryptech.demoapp.model.HorizontalScrollProductModel;
-import com.cryptech.demoapp.model.SliderModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cryptech.demoapp.db.Dbqueries.lists;
+import static com.cryptech.demoapp.db.Dbqueries.loadedCategoriesNames;
+import static com.cryptech.demoapp.db.Dbqueries.loadFragmentData;
+
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
+    private  HomePageAdapter homePageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +43,19 @@ public class CategoryActivity extends AppCompatActivity {
         /********  BANNER SLIDER STARTS ******/
 
 //        bannerSliderViewPager = view.findViewById(R.id.banner_slider_viewPager);
-        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
-
-        sliderModelList.add(new SliderModel(R.drawable.banner3, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner4, "#077AE4"));
-
-        sliderModelList.add(new SliderModel(R.drawable.banner, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner2, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner3, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner4, "#077AE4"));
-
-        sliderModelList.add(new SliderModel(R.drawable.banner, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner2, "#077AE4"));
-
+//        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
+//
+//        sliderModelList.add(new SliderModel(R.drawable.banner3, "#077AE4"));
+//        sliderModelList.add(new SliderModel(R.drawable.banner4, "#077AE4"));
+//
+//        sliderModelList.add(new SliderModel(R.drawable.banner, "#077AE4"));
+//        sliderModelList.add(new SliderModel(R.drawable.banner2, "#077AE4"));
+//        sliderModelList.add(new SliderModel(R.drawable.banner3, "#077AE4"));
+//        sliderModelList.add(new SliderModel(R.drawable.banner4, "#077AE4"));
+//
+//        sliderModelList.add(new SliderModel(R.drawable.banner, "#077AE4"));
+//        sliderModelList.add(new SliderModel(R.drawable.banner2, "#077AE4"));
+//
 
 
 //        SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
@@ -116,28 +118,25 @@ public class CategoryActivity extends AppCompatActivity {
 //        /********  STRIP AD SLIDER ENDS ******/
 
         /********  HORIZONTAL PRODUCT STARTS ******/
-//
-//        h_itemTitle = view.findViewById(R.id.horizontal_deals_of_day);
-//        h_viewAllBtn = view.findViewById(R.id.horizontal_view_all);
-//        h_recyclerView = view.findViewById(R.id.horizontal_recyclerView);
+
 
         List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone4, "Huawei",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone1, "T-Mobile 1",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone2, "Nokia",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone3, "Samsung",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone4, "Huawei",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone2, "Nokia 2",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone3, "Samsung 1",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone1, "T-Mobile 2",
-                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone4, "Huawei",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone1, "T-Mobile 1",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone2, "Nokia",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone3, "Samsung",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone4, "Huawei",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone2, "Nokia 2",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone3, "Samsung 1",
+//                "SD 445 processor", "Gh 650/-"));
+//        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone1, "T-Mobile 2",
+//                "SD 445 processor", "Gh 650/-"));
 
 //        HorizontalScrollProductAdapter horizontalScrollProductAdapter = new HorizontalScrollProductAdapter(horizontalScrollProductModelList);
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -147,17 +146,6 @@ public class CategoryActivity extends AppCompatActivity {
 //        horizontalScrollProductAdapter.notifyDataSetChanged();
         /********  HORIZONTAL PRODUCT ENDS ******/
 
-//
-//        /********  GRID PRODUCT STARTS ******/
-//
-//        TextView gridLayoutTitle = view.findViewById(R.id.grid_product_layout_title);
-//        Button gridLayoutViewAllBtn = view.findViewById(R.id.grid_product_layout_viewAll_btn);
-//        GridView gridView = view.findViewById(R.id.grid_product_layout_gridView);
-//
-//        gridView.setAdapter(new GridProductLayoutAdapter(horizontalScrollProductModelList));
-//
-//
-//        /********  GRID PRODUCT ENDS ******/
 
 
         /********  TESTING STARTS ******/
@@ -167,18 +155,32 @@ public class CategoryActivity extends AppCompatActivity {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
-        List<HomePageModel> homePageModelList = new ArrayList<>();
-        homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.banner,"#ff0000"));
-        homePageModelList.add(new HomePageModel(2,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(3,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.banner,"#000000"));
-        homePageModelList.add(new HomePageModel(3,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(2,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.banner2,"#ffff00"));
+//        List<HomePageModel> homePageModelList = new ArrayList<>();
+//        homePageModelList.add(new HomePageModel(0,sliderModelList));
+//        homePageModelList.add(new HomePageModel(1, R.drawable.banner,"#ff0000"));
+//        homePageModelList.add(new HomePageModel(2,"Deals of the Day", horizontalScrollProductModelList));
+//        homePageModelList.add(new HomePageModel(3,"Deals of the Day", horizontalScrollProductModelList));
+//        homePageModelList.add(new HomePageModel(1, R.drawable.banner,"#000000"));
+//        homePageModelList.add(new HomePageModel(3,"Deals of the Day", horizontalScrollProductModelList));
+//        homePageModelList.add(new HomePageModel(2,"Deals of the Day", horizontalScrollProductModelList));
+//        homePageModelList.add(new HomePageModel(1, R.drawable.banner2,"#ffff00"));
 //        homePageModelList.add(new HomePageModel(0, sliderModelList));
 
-        HomePageAdapter homePageAdapter = new HomePageAdapter(homePageModelList);
+        int listPosition = 0;
+        for (int x = 0; x < loadedCategoriesNames.size(); x++) {
+            if (loadedCategoriesNames.get(x).equals(title.toUpperCase())) {
+                listPosition = x;
+            }
+        }
+        if (listPosition == 0) {
+            loadedCategoriesNames.add(title.toUpperCase());
+            lists.add(new ArrayList<HomePageModel>());
+            homePageAdapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size() -1));
+            loadFragmentData(homePageAdapter, this, loadedCategoriesNames.size() -1, title);
+        } else {
+            homePageAdapter = new HomePageAdapter(lists.get(listPosition));
+        }
+
         categoryRecyclerView.setAdapter(homePageAdapter);
         homePageAdapter.notifyDataSetChanged();
 

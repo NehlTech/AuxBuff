@@ -1,11 +1,17 @@
 package com.cryptech.demoapp.activities;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.cryptech.demoapp.R;
 import com.cryptech.demoapp.fragments.HomeFragment;
+import com.cryptech.demoapp.fragments.MyAccountFragment;
+import com.cryptech.demoapp.fragments.MyBookingFragment;
 import com.cryptech.demoapp.fragments.MyCartFragment;
 import com.cryptech.demoapp.fragments.MyOrdersFragment;
 import com.cryptech.demoapp.fragments.MyRewardFragment;
@@ -40,12 +46,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int ORDERS_FRAGMENT = 2;
     private static final int WISHLIST_FRAGMENT = 3;
     private static final int REWARD_FRAGMENT = 4;
+    private static final int ACCOUNT_FRAGMENT = 5;
+    private static final int BOOKING_FRAGMENT = 6;
+
+    public static Boolean showCart = false;
 
     private FrameLayout frameLayout;
     private static int currentFragment = -1;
     private NavigationView navigationView;
     private ImageView actionBarLogo;
-
+  
     private DrawerLayout drawer;
 
     private Window window;
@@ -64,16 +74,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
         drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open,R.string.close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout = findViewById(R.id.main_framelayout);
-        setFragment(new HomeFragment(), HOME_FRAGMENT);
+
+
+        if (showCart) {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            goToFragment("My Cart", new MyCartFragment(), -2);
+        } else {
+
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+            setFragment(new HomeFragment(), HOME_FRAGMENT);
+        }
+
+
+
+
 //        // Passing each menu ID as a set of Ids because each
 //        // menu should be considered as top level destinations.
 //        mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -86,7 +109,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        NavigationUI.setupWithNavController(navigationView, navController);
 
     }
-
+//    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//if (activeNetwork != null) {
+//        // connected to the internet
+//        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+//            // connected to wifi
+//        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+//            // connected to mobile data
+//        }
+//    } else {
+//        // not connected to the internet
+//    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -94,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (currentFragment == HOME_FRAGMENT) {
-
+                currentFragment = -1;
                 super.onBackPressed();
             } else {
                 actionBarLogo.setVisibility(View.VISIBLE);
@@ -168,7 +202,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_my_wishlist) {
             goToFragment("My WishList",new MyWishListFragment(), WISHLIST_FRAGMENT);
 
+        } else if (id == R.id.nav_booking) {
+            goToFragment("Booking", new MyBookingFragment(), BOOKING_FRAGMENT);
         } else if (id == R.id.nav_account) {
+            goToFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGMENT);
 
         } else if (id == R.id.nav_signOut) {
 

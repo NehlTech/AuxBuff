@@ -11,4 +11,5 @@
 
     <color name="successfulGreen">#11A10C</color>
     <color name="RecyclerViewBackground">#d6d6d6</color>
+    <color name="RecyclerViewBackground2">#05204A</color>
 </resources>

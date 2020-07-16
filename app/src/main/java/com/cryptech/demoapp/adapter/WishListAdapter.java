@@ -1,5 +1,6 @@
 package com.cryptech.demoapp.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cryptech.demoapp.R;
+import com.cryptech.demoapp.activities.ProductDetailsActivity;
 import com.cryptech.demoapp.model.WishListModel;
 
 import java.util.List;
@@ -19,9 +23,11 @@ import java.util.List;
 public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHolder> {
 
     private List<WishListModel> wishListModelList;
+    private Boolean wishlist;
 
-    public WishListAdapter(List<WishListModel> wishListModelList) {
+    public WishListAdapter(List<WishListModel> wishListModelList, Boolean wishlist) {
         this.wishListModelList = wishListModelList;
+        this.wishlist = wishlist;
     }
 
     @NonNull
@@ -35,14 +41,14 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        int resource = wishListModelList.get(position).getProductImage();
+        String resource = wishListModelList.get(position).getProductImage();
         String title = wishListModelList.get(position).getProductTitle();
-        int freeCoupons = wishListModelList.get(position).getFreeCoupon();
+        long freeCoupons = wishListModelList.get(position).getFreeCoupon();
         String rating = wishListModelList.get(position).getRating();
-        int totalRatings = wishListModelList.get(position).getTotalRatings();
+        long totalRatings = wishListModelList.get(position).getTotalRatings();
         String productPrice = wishListModelList.get(position).getProductPrice();
         String reducedPrice = wishListModelList.get(position).getReducedPrice();
-        String paymentMethod = wishListModelList.get(position).getPaymentMethod();
+        boolean paymentMethod = wishListModelList.get(position).getCOD();
         holder.setData(resource,title,freeCoupons,rating,totalRatings,productPrice,reducedPrice,paymentMethod);
 
     }
@@ -82,8 +88,8 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
             deletedBtn = itemView.findViewById(R.id.remove_btn);
         }
 
-        private void setData(int resource, String title, int freeCouponsNo, String averageRate, int totalRatingsNo, String price, String reducedPriceValue, String payMethod) {
-            productImage.setImageResource(resource);
+        private void setData(String resource, String title, long freeCouponsNo, String averageRate, long totalRatingsNo, String price, String reducedPriceValue, boolean payMethod) {
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.home)).into(productImage);
             productTitle.setText(title);
             if (freeCouponsNo != 0) {
                 couponIcon.setVisibility(View.VISIBLE);
@@ -98,14 +104,34 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
                 freeCoupons.setVisibility(View.INVISIBLE);
             }
             ratings.setText(averageRate);
-            totalRatings.setText(totalRatingsNo + "(ratings)");
-            productPrice.setText(price);
-            reducedPrice.setText(reducedPriceValue);
-            paymentMethod.setText(payMethod);
+            totalRatings.setText("("+totalRatingsNo + ")ratings");
+            productPrice.setText("Gh"+price+"/-");
+            reducedPrice.setText("Gh"+reducedPriceValue+"/-");
+
+            if (payMethod) {
+                paymentMethod.setVisibility(View.VISIBLE);
+            } else {
+                paymentMethod.setVisibility(View.INVISIBLE);
+            }
+
+
+            if (wishlist) {
+                deletedBtn.setVisibility(View.VISIBLE);
+            } else {
+                deletedBtn.setVisibility(View.GONE);
+            }
             deletedBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(itemView.getContext(), "deleted", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+                    itemView.getContext().startActivity(productDetailsIntent);
                 }
             });
         }

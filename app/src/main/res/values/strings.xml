@@ -20,6 +20,7 @@
     <string name="menu_my_signOut">Sign Out</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="menu_my_booking">Booking</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>

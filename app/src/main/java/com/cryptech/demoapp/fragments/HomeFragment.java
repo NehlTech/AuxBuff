@@ -1,6 +1,9 @@
 package com.cryptech.demoapp.fragments;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 
@@ -9,26 +12,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+
+import com.bumptech.glide.Glide;
 import com.cryptech.demoapp.R;
 import com.cryptech.demoapp.adapter.CategoryAdapter;
 import com.cryptech.demoapp.adapter.HomePageAdapter;
-import com.cryptech.demoapp.adapter.HorizontalScrollProductAdapter;
-import com.cryptech.demoapp.adapter.SliderAdapter;
-import com.cryptech.demoapp.model.CategoryModel;
 import com.cryptech.demoapp.model.HomePageModel;
-import com.cryptech.demoapp.model.HorizontalScrollProductModel;
-import com.cryptech.demoapp.model.SliderModel;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import static com.cryptech.demoapp.db.Dbqueries.categoryModelList;
+import static com.cryptech.demoapp.db.Dbqueries.lists;
+import static com.cryptech.demoapp.db.Dbqueries.loadCategories;
+import static com.cryptech.demoapp.db.Dbqueries.loadedCategoriesNames;
+import static com.cryptech.demoapp.db.Dbqueries.loadFragmentData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,250 +44,82 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView categoryRecyclerView;
     private CategoryAdapter categoryAdapter;
-    private RecyclerView testing;
+    private HomePageAdapter homePageAdapter;
+    private RecyclerView homePageRecyclerView;
+
+    private ImageView noInternetConnection;
 
 
-//    /********  BANNER SLIDER VARIABLES STARTS ******/
-//    private ViewPager bannerSliderViewPager;
-//    private List<SliderModel> sliderModelList;
-//    private int currentPage = 2;
-//    private Timer timer;
-//    final private long DELAY_TIME = 3000;
-//    final private long PERIOD_TIME = 3000;
-//
-//    /********  BANNER SLIDER VARIABLES ENDS ******/
-//
-//    /********  STRIP AD SLIDER VARIABLES STARTS ******/
-//    private ImageView stripAdImage;
-//    private ConstraintLayout stripAdImageContainer;
-//    /********  STRIP AD SLIDER VARIABLES ENDS ******/
-//
-//    /********  HORIZONTAL PRODUCT LAYOUT VARIABLES STARTS ******/
-//    private TextView h_itemTitle;
-//    private Button h_viewAllBtn;
-//    private RecyclerView h_recyclerView;
-//    /********  HORIZONTAL PRODUCT LAYOUT VARIABLES ENDS ******/
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        categoryRecyclerView = view.findViewById(R.id.category_recyclerview);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        categoryRecyclerView.setLayoutManager(layoutManager);
+        noInternetConnection = view.findViewById(R.id.no_internet_connection);
 
-        List<CategoryModel> categoryModelList = new ArrayList<CategoryModel>();
-        categoryModelList.add(new CategoryModel("link", "Home"));
-        categoryModelList.add(new CategoryModel("link", "Electronics"));
-        categoryModelList.add(new CategoryModel("link", "Appliances"));
-        categoryModelList.add(new CategoryModel("link", "Furniture"));
-        categoryModelList.add(new CategoryModel("link", "Fashion"));
-        categoryModelList.add(new CategoryModel("link", "Toys"));
-        categoryModelList.add(new CategoryModel("link", "Sports"));
-        categoryModelList.add(new CategoryModel("link", "Arts"));
-        categoryModelList.add(new CategoryModel("link", "Books"));
-        categoryModelList.add(new CategoryModel("link", "Shoes"));
-        categoryModelList.add(new CategoryModel("link", "Transports"));
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected() == true) {
 
-        categoryAdapter = new CategoryAdapter(categoryModelList);
-        categoryRecyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
+                noInternetConnection.setVisibility(View.GONE);
+                categoryRecyclerView = view.findViewById(R.id.category_recyclerview);
+
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                categoryRecyclerView.setLayoutManager(layoutManager);
 
 
-        /********  BANNER SLIDER STARTS ******/
+                categoryAdapter = new CategoryAdapter(categoryModelList);
+                categoryRecyclerView.setAdapter(categoryAdapter);
 
-//        bannerSliderViewPager = view.findViewById(R.id.banner_slider_viewPager);
-        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
-
-        sliderModelList.add(new SliderModel(R.drawable.banner3, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner4, "#077AE4"));
-
-        sliderModelList.add(new SliderModel(R.drawable.banner, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner2, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner3, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner4, "#077AE4"));
-
-        sliderModelList.add(new SliderModel(R.drawable.banner, "#077AE4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner2, "#077AE4"));
+                if (categoryModelList.size() == 0) {
+                    loadCategories(categoryAdapter, getContext());
+                } else {
+                    categoryAdapter.notifyDataSetChanged();
+                }
 
 
 
-//        SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
-//        bannerSliderViewPager.setAdapter(sliderAdapter);
-//        bannerSliderViewPager.setClipToPadding(false);
-//        bannerSliderViewPager.setPageMargin(20);
-//
-//        bannerSliderViewPager.setCurrentItem(currentPage);
-//
-//        //pager listener
-//
-//        ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                currentPage = position;
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//                if (state == ViewPager.SCROLL_STATE_IDLE) {
-//                    pageLooper();
-//                }
-//            }
-//        };
-//        bannerSliderViewPager.addOnPageChangeListener(onPageChangeListener);
-//
-//        startBannerSlideShow();
-//
-//        bannerSliderViewPager.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                pageLooper();
-//                stopBannerSlideShow();
-//
-//                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-//                    startBannerSlideShow();
-//                }
-//                return false;
-//            }
-//        });
-//
-//        /********  BANNER SLIDER ENDS ******/
+                /********  HOMEPAGE STARTS ******/
 
-//
-//        /********  STRIP AD SLIDER STARTS ******/
-//
-//        stripAdImage = view.findViewById(R.id.strip_ad_banner);
-//        stripAdImageContainer = view.findViewById(R.id.strip_ad_container);
-//
-//        stripAdImage.setImageResource(R.drawable.banner);
-//        stripAdImageContainer.setBackgroundColor(Color.parseColor("#000000"));
-//
-//        /********  STRIP AD SLIDER ENDS ******/
-
-        /********  HORIZONTAL PRODUCT STARTS ******/
-//
-//        h_itemTitle = view.findViewById(R.id.horizontal_deals_of_day);
-//        h_viewAllBtn = view.findViewById(R.id.horizontal_view_all);
-//        h_recyclerView = view.findViewById(R.id.horizontal_recyclerView);
-
-        List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone4, "Huawei",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone1, "T-Mobile 1",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone2, "Nokia",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone3, "Samsung",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone4, "Huawei",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone2, "Nokia 2",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone3, "Samsung 1",
-                "SD 445 processor", "Gh 650/-"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.drawable.phone1, "T-Mobile 2",
-                "SD 445 processor", "Gh 650/-"));
-
-//        HorizontalScrollProductAdapter horizontalScrollProductAdapter = new HorizontalScrollProductAdapter(horizontalScrollProductModelList);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        h_recyclerView.setLayoutManager(linearLayoutManager);
-//        h_recyclerView.setAdapter(horizontalScrollProductAdapter);
-//        horizontalScrollProductAdapter.notifyDataSetChanged();
-        /********  HORIZONTAL PRODUCT ENDS ******/
-
-//
-//        /********  GRID PRODUCT STARTS ******/
-//
-//        TextView gridLayoutTitle = view.findViewById(R.id.grid_product_layout_title);
-//        Button gridLayoutViewAllBtn = view.findViewById(R.id.grid_product_layout_viewAll_btn);
-//        GridView gridView = view.findViewById(R.id.grid_product_layout_gridView);
-//
-//        gridView.setAdapter(new GridProductLayoutAdapter(horizontalScrollProductModelList));
-//
-//
-//        /********  GRID PRODUCT ENDS ******/
+                homePageRecyclerView = view.findViewById(R.id.home_page_recyclerview);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                homePageRecyclerView.setLayoutManager(linearLayoutManager);
 
 
-        /********  TESTING STARTS ******/
+                if (lists.size() == 0) {
+                    loadedCategoriesNames.add("HOME");
+                    lists.add(new ArrayList<HomePageModel>());
+                    homePageAdapter = new HomePageAdapter(lists.get(0));
+                    loadFragmentData(homePageAdapter, getContext(),0,"Home");
+                } else {
+                    homePageAdapter = new HomePageAdapter(lists.get(0));
+                    homePageAdapter.notifyDataSetChanged();
+                }
 
-        testing = view.findViewById(R.id.home_page_recyclerview);
-        LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
-        testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        testing.setLayoutManager(testingLayoutManager);
+                homePageRecyclerView.setAdapter(homePageAdapter);
 
-        List<HomePageModel> homePageModelList = new ArrayList<>();
-        homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.banner,"#ff0000"));
-        homePageModelList.add(new HomePageModel(2,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(3,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.banner,"#000000"));
-        homePageModelList.add(new HomePageModel(3,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(2,"Deals of the Day", horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1, R.drawable.banner2,"#ffff00"));
-        homePageModelList.add(new HomePageModel(0, sliderModelList));
-
-        HomePageAdapter homePageAdapter = new HomePageAdapter(homePageModelList);
-        testing.setAdapter(homePageAdapter);
-        homePageAdapter.notifyDataSetChanged();
+            }else{
+                Glide.with(this).load(R.drawable.nointerntetconnection).into(noInternetConnection);
+                noInternetConnection.setVisibility(View.VISIBLE);
+            }
+        }
 
 
-        /********  TESTING ENDS ******/
+        /********  HOMEPAGE ENDS ******/
 
 
         return view;
     }
 
 
-//    /********  BANNER SLIDER PAGE LOOPER METHOD STARTS******/
-//
-//    private void pageLooper() {
-//        if (currentPage == sliderModelList.size() - 2) {
-//            currentPage = 2;
-//            bannerSliderViewPager.setCurrentItem(currentPage, false);
-//        }
-//        if (currentPage == 1) {
-//            currentPage = sliderModelList.size() - 3;
-//            bannerSliderViewPager.setCurrentItem(currentPage, false);
-//
-//        }
-//    }
-//
-//    private void startBannerSlideShow() {
-//        final Handler handler = new Handler();
-//        final Runnable update = new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                if (currentPage >= sliderModelList.size()) {
-//                    currentPage = 1;
-//                }
-//                bannerSliderViewPager.setCurrentItem(currentPage++, true);
-//            }
-//        };
-//        timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                handler.post(update);
-//            }
-//        }, DELAY_TIME, PERIOD_TIME);
-//    }
-//
-//    private void stopBannerSlideShow() {
-//        timer.cancel();
-//    }
-//
-//    /********  BANNER SLIDER PAGE LOOPER METHOD ENDS******/
 
 }

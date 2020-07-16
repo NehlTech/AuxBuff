@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cryptech.demoapp.R;
 import com.cryptech.demoapp.activities.CategoryActivity;
 import com.cryptech.demoapp.model.CategoryModel;
@@ -39,6 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         String icon = categoryModelList.get(position).getCategoryIconLink();
         String name = categoryModelList.get(position).getCategoryName();
         holder.setCategory(name, position);
+        holder.setCategoryIcon(icon);
 
     }
 
@@ -59,8 +62,27 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             categoryName = itemView.findViewById(R.id.category_home_name);
         }
 
-        private void setCategoryIcon() {
+        private void setCategoryIcon(String iconUrl) {
             //todo: set category icons here;
+            if (!iconUrl.equals("null")) {
+
+//                if (iconUrl.startsWith("http://")) {
+//                    iconUrl = iconUrl.replace("http://", "https://");
+//                    RequestOptions requestOptions = new RequestOptions();
+//                    requestOptions.placeholder(R.drawable.home);
+//                    Glide.with(itemView.getContext())
+//                            .setDefaultRequestOptions(requestOptions)
+//                            .load(iconUrl)
+//                            .into(categoryIcon);
+//                }
+                Glide.with(itemView.getContext())
+                        .load(iconUrl)
+                        .apply(new RequestOptions()
+                                .placeholder(R.drawable.home))
+                        .into(categoryIcon);
+            }
+
+
         }
 
         private void setCategory(final String name, final int position) {

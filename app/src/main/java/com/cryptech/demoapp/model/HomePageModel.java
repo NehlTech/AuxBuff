@@ -11,6 +11,10 @@ public class HomePageModel {
     public static final int GRID_PRODUCT_VIEW = 3;
 
     private int type;
+    private String backgroundColor;
+
+    /********  BANNER SLIDER STARTS ******/
+
     private List<SliderModel> sliderModelList;
 
     public HomePageModel(int type, List<SliderModel> sliderModelList) {
@@ -37,20 +41,20 @@ public class HomePageModel {
 
     /********  STRIP AD SLIDER STARTS ******/
 
-    private int resource;
-    private String backgroundColor;
+    private String resource;
 
-    public HomePageModel(int type, int resource, String backgroundColor) {
+
+    public HomePageModel(int type, String resource, String backgroundColor) {
         this.type = type;
         this.resource = resource;
         this.backgroundColor = backgroundColor;
     }
 
-    public int getResource() {
+    public String getResource() {
         return resource;
     }
 
-    public void setResource(int resource) {
+    public void setResource(String resource) {
         this.resource = resource;
     }
 
@@ -69,12 +73,37 @@ public class HomePageModel {
 
     private String title;
     private List<HorizontalScrollProductModel> horizontalScrollProductModelList;
+    private List<WishListModel> viewAllProductList;
 
-    public HomePageModel(int type, String title, List<HorizontalScrollProductModel> horizontalScrollProductModelList) {
+    /********  HORIZONTAL PRODUCT LAYOUT STARTS ******/
+    public HomePageModel(int type, String title, String backgroundColor, List<HorizontalScrollProductModel> horizontalScrollProductModelList, List<WishListModel> viewAllProductList) {
         this.type = type;
         this.title = title;
+        this.backgroundColor = backgroundColor;
+        this.horizontalScrollProductModelList = horizontalScrollProductModelList;
+        this.viewAllProductList = viewAllProductList;
+    }
+
+
+    public List<WishListModel> getViewAllProductList() {
+        return viewAllProductList;
+    }
+
+    public void setViewAllProductList(List<WishListModel> viewAllProductList) {
+        this.viewAllProductList = viewAllProductList;
+    }
+/********  HORIZONTAL PRODUCT LAYOUT ENDS  ******/
+
+
+    /********  GRID PRODUCT LAYOUT STARTS ******/
+    public HomePageModel(int type, String title, String backgroundColor, List<HorizontalScrollProductModel> horizontalScrollProductModelList) {
+        this.type = type;
+        this.title = title;
+        this.backgroundColor = backgroundColor;
         this.horizontalScrollProductModelList = horizontalScrollProductModelList;
     }
+
+
 
     public String getTitle() {
         return title;
@@ -92,5 +121,6 @@ public class HomePageModel {
         this.horizontalScrollProductModelList = horizontalScrollProductModelList;
     }
 
-    /********  HORIZONTAL PRODUCT LAYOUT AND GRID PRODUCT LAYOUT ENDS  ******/
+
+    /******** GRID PRODUCT LAYOUT ENDS  ******/
 }

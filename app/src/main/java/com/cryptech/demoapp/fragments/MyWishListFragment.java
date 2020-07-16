@@ -42,23 +42,8 @@ public class MyWishListFragment extends Fragment {
         wishlistRecyclerView.setLayoutManager(linearLayoutManager);
 
         List<WishListModel> wishListModelList = new ArrayList<>();
-        wishListModelList.add(new WishListModel(R.drawable.phone4, 1, 156,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone1, 0, 166,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone2, 4, 15,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone5, 2, 156,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone1, 8, 11,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone1, 0, 190,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone4, 3, 156,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone2, 2, 2998,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone3, 0, 156,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone5, 6, 2,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone1, 1, 156,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone5, 0, 156,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone4, 1, 1,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone1, 1, 11,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
-        wishListModelList.add(new WishListModel(R.drawable.phone2, 0, 0,"Pixel 2", "4", "Gh 14999/-", "Gh 599/-", "Cash on delivery"));
 
-        WishListAdapter wishListAdapter = new WishListAdapter(wishListModelList);
+        WishListAdapter wishListAdapter = new WishListAdapter(wishListModelList,true);
         wishlistRecyclerView.setAdapter(wishListAdapter);
         wishListAdapter.notifyDataSetChanged();
         return view;

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cryptech.demoapp.R;
 import com.cryptech.demoapp.activities.ProductDetailsActivity;
 import com.cryptech.demoapp.model.HorizontalScrollProductModel;
@@ -37,23 +39,23 @@ public class HorizontalScrollProductAdapter extends RecyclerView.Adapter<Horizon
     @Override
     public void onBindViewHolder(@NonNull HorizontalScrollProductAdapter.ViewHolder holder, int position) {
 
-//        int resource = horizontalScrollProductModelList.get(position).getProductImage();
-//        String title = horizontalScrollProductModelList.get(position).getProductTitle();
-//        String description = horizontalScrollProductModelList.get(position).getProductDescription();
-//        String price = horizontalScrollProductModelList.get(position).getProductPrice();
-//
-//        holder.setProductImage(resource);
-//        holder.setProductTitle(title);
-//        holder.setProductDescription(description);
-//        holder.setProductPrice(price);
+        String resource = horizontalScrollProductModelList.get(position).getProductImage();
+        String title = horizontalScrollProductModelList.get(position).getProductTitle();
+        String description = horizontalScrollProductModelList.get(position).getProductDescription();
+        String price = horizontalScrollProductModelList.get(position).getProductPrice();
+
+        holder.setProductImage(resource);
+        holder.setProductTitle(title);
+        holder.setProductDescription(description);
+        holder.setProductPrice(price);
 
 
-        final ViewHolder viewHolder =holder;
-        HorizontalScrollProductModel horizontalScrollProductModel = horizontalScrollProductModelList.get(position);
-        viewHolder.setProductImage(horizontalScrollProductModel.getProductImage());
-        viewHolder.setProductTitle(horizontalScrollProductModel.getProductTitle());
-        viewHolder.setProductDescription(horizontalScrollProductModel.getProductDescription());
-        viewHolder.setProductPrice(horizontalScrollProductModel.getProductPrice());
+//        final ViewHolder viewHolder =holder;
+//        HorizontalScrollProductModel horizontalScrollProductModel = horizontalScrollProductModelList.get(position);
+//        viewHolder.setProductImage(horizontalScrollProductModel.getProductImage());
+//        viewHolder.setProductTitle(horizontalScrollProductModel.getProductTitle());
+//        viewHolder.setProductDescription(horizontalScrollProductModel.getProductDescription());
+//        viewHolder.setProductPrice(horizontalScrollProductModel.getProductPrice());
 
     }
 
@@ -92,8 +94,12 @@ public class HorizontalScrollProductAdapter extends RecyclerView.Adapter<Horizon
             });
         }
 
-        private void setProductImage(int resource) {
-            productImage.setImageResource(resource);
+        private void setProductImage(String resource) {
+            Glide.with(itemView.getContext())
+                    .load(resource)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.home))
+                    .into(productImage);
         }
 
         private void setProductTitle(String title) {
@@ -105,7 +111,7 @@ public class HorizontalScrollProductAdapter extends RecyclerView.Adapter<Horizon
         }
 
         private void setProductPrice(String price) {
-            productPrice.setText(price);
+            productPrice.setText("Ghc"+ price+"/-");
         }
     }
 }

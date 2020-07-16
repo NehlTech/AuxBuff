@@ -2,17 +2,17 @@ package com.cryptech.demoapp.model;
 
 public class WishListModel {
 
-    private int productImage;
-    private int freeCoupon;
-    private int totalRatings;
+    private String productImage;
+    private long freeCoupon;
+    private long totalRatings;
 
     private String productTitle;
     private String rating;
     private String productPrice;
     private String reducedPrice;
-    private String paymentMethod;
+    private Boolean COD;
 
-    public WishListModel(int productImage, int freeCoupon, int totalRatings, String productTitle, String rating, String productPrice, String reducedPrice, String paymentMethod) {
+    public WishListModel(String productImage, long freeCoupon, long totalRatings, String productTitle, String rating, String productPrice, String reducedPrice, Boolean COD) {
         this.productImage = productImage;
         this.freeCoupon = freeCoupon;
         this.totalRatings = totalRatings;
@@ -20,30 +20,30 @@ public class WishListModel {
         this.rating = rating;
         this.productPrice = productPrice;
         this.reducedPrice = reducedPrice;
-        this.paymentMethod = paymentMethod;
+        this.COD = COD;
     }
 
-    public int getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
-    public int getFreeCoupon() {
+    public long getFreeCoupon() {
         return freeCoupon;
     }
 
-    public void setFreeCoupon(int freeCoupon) {
+    public void setFreeCoupon(long freeCoupon) {
         this.freeCoupon = freeCoupon;
     }
 
-    public int getTotalRatings() {
+    public long getTotalRatings() {
         return totalRatings;
     }
 
-    public void setTotalRatings(int totalRatings) {
+    public void setTotalRatings(long totalRatings) {
         this.totalRatings = totalRatings;
     }
 
@@ -79,11 +79,11 @@ public class WishListModel {
         this.reducedPrice = reducedPrice;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public Boolean getCOD() {
+        return COD;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setCOD(Boolean COD) {
+        this.COD = COD;
     }
 }
